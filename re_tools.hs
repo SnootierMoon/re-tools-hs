@@ -145,9 +145,9 @@ nfaFromRe (Repeat re) =
 graphvizNfa :: Label t => Nfa t -> String
 graphvizNfa nfa =
     "digraph {\n  node [shape=circle];\n " ++
-    concat (((" " ++) . show) <$> [0..nfinal0 nfa - 1]) ++
+    concat (((" " ++) . show) <$> [0..toInteger (nfinal0 nfa) - 1]) ++
     "\n  node [shape=doublecircle];\n " ++
-    concat (((" " ++) . show) <$> [nfinal0 nfa..nstates nfa - 1]) ++
+    concat (((" " ++) . show) <$> [toInteger (nfinal0 nfa)..toInteger (nstates nfa) - 1]) ++
     "\n" ++ concat (showEdge <$> Map.toList edges) ++ "}"
   where
     showEdge ((u, v), es) =
